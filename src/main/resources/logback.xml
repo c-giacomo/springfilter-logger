@@ -1,0 +1,33 @@
+<configuration>
+	<property name="LOGS" value="C:/workspace2022-09/springFilterLogging" />
+
+	<appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+		<encoder>
+			<pattern>%d{yyyy-MM-dd.HH:mm:ss} %5level %logger %msg%n</pattern>
+		</encoder>
+	</appender>
+	<logger name="com.filter.logging" level="INFO" />
+	<root level="info">
+		<appender-ref ref="STDOUT" />
+	</root>
+
+	<appender name="GaranteGenericFile" class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<file>${LOGS}/garante.log</file>
+	
+		<rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
+			<fileNamePattern>${LOGS}/garante-%d{yyyy-MM-dd}.%i.log.gz</fileNamePattern>
+			<maxFileSize>10MB</maxFileSize>    
+			<maxHistory>30</maxHistory>
+			<totalSizeCap>1GB</totalSizeCap>
+		</rollingPolicy>
+		<encoder>
+			<Pattern>%d{yyyy-MM-dd.HH:mm:ss} %5level %logger %msg%n</Pattern>
+		</encoder>
+	</appender>
+
+
+   	<logger name="garantegeneric" level="info" additivity="false">
+       		<appender-ref ref="GaranteGenericFile" />
+       		<appender-ref ref="STDOUT" />
+   	</logger>
+</configuration>
