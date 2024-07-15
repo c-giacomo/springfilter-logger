@@ -3,7 +3,9 @@ package com.filter.logging.bean;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -17,6 +19,7 @@ import lombok.extern.slf4j.Slf4j;
 @Setter
 public class LoggingPojo {
 	
+	private Set<String> matricola;
 	private String requestType;
 	private String requestUri;
 	private String requestHost;
@@ -27,6 +30,12 @@ public class LoggingPojo {
 	private String methodSignature;
 	private String returnType;
 	private String returnObject;
+	
+	public LoggingPojo() {
+		matricola = new HashSet<>();
+		matricola.add("ciao");
+		matricola.add("fica");
+	}
 	
 	@SuppressWarnings("rawtypes")
 	public LoggingPojo build(HttpServletRequest request, HttpServletResponse response, Object requestBody, Object responseBody, Method method, long timeTaken) {
@@ -94,6 +103,8 @@ public class LoggingPojo {
 		builder.append(methodSignature);
 		builder.append(", RETURNTYPE=");
 		builder.append(returnType);
+		builder.append(", MATRICOLA=");
+		builder.append(matricola);
 		if (returnObject != null) {
 			builder.append(", RETURNOBJECT=");
 			builder.append(returnObject);

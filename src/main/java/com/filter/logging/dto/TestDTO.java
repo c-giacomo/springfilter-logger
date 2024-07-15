@@ -1,5 +1,7 @@
 package com.filter.logging.dto;
 
+import java.io.Serializable;
+
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -7,7 +9,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @NoArgsConstructor
-public class TestDTO {
+public class TestDTO implements Serializable {
 	
 	private Integer id;
 	private String name;
