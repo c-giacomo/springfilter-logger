@@ -12,7 +12,7 @@ import org.springframework.web.filter.OncePerRequestFilter;
 import org.springframework.web.util.ContentCachingRequestWrapper;
 import org.springframework.web.util.ContentCachingResponseWrapper;
 
-import com.filter.logging.bean.LoggingPojo;
+import com.filter.logging.bean.GenericLoggingPojo;
 import com.filter.logging.filter.interfaces.FilterInfoBuilder;
 
 import lombok.extern.slf4j.Slf4j;
@@ -51,7 +51,7 @@ public class LoggingFilter extends OncePerRequestFilter {
         if (requestBody.equals(""))
         	requestBody = builder.resolveQueryString(method, request);
         
-        LoggingPojo pojo = builder.buildPojo(request, response, requestBody, responseBody, method, timeTaken);
+        GenericLoggingPojo pojo = builder.buildPojo(request, response, requestBody, responseBody, method, timeTaken);
         
         log.info(pojo.toString());
         

@@ -24,10 +24,10 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 @Component
 @Primary
-@Profile("test")
-public class PopsoFilterInfoBuilder extends GenericFilterInfoBuilder {
+@Profile("custom")
+public class CustomLoggerBuilder extends GenericLoggerBuilder {
 	
-	public PopsoFilterInfoBuilder(ObjectMapper mapper, DispatcherServlet dispatcher) {
+	public CustomLoggerBuilder(ObjectMapper mapper, DispatcherServlet dispatcher) {
 		super(mapper, dispatcher);
 	}
 	
@@ -64,14 +64,14 @@ public class PopsoFilterInfoBuilder extends GenericFilterInfoBuilder {
 			String tsv = new XSSFExcelExtractor(input).getText();
 			BufferedReader reader = new BufferedReader(new StringReader(tsv));
 			
-			String line;
-			StringBuilder builder = new StringBuilder();
-			while ((line = reader.readLine()) != null) {
-                builder.append(line);
-                builder.append("\n");
-            }
+//			String line;
+//			StringBuilder builder = new StringBuilder();
+//			while ((line = reader.readLine()) != null) {
+//                builder.append(line);
+//                builder.append("\n");
+//            }
 			
-			return builder;
+			return (reader.lines().count() - 2);
 		} catch (Exception e) {
 			log.error("",e);
 			return "";

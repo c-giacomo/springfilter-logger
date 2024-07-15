@@ -25,7 +25,7 @@ import org.springframework.web.util.ServletRequestPathUtils;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.filter.logging.bean.LoggingPojo;
+import com.filter.logging.bean.GenericLoggingPojo;
 import com.filter.logging.filter.interfaces.FilterInfoBuilder;
 
 import lombok.Getter;
@@ -34,12 +34,12 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 @Getter
 @Component
-public class GenericFilterInfoBuilder implements FilterInfoBuilder {
+public class GenericLoggerBuilder implements FilterInfoBuilder {
 	
 	protected final ObjectMapper mapper;
 	protected final DispatcherServlet dispatcher;
 
-	public GenericFilterInfoBuilder(ObjectMapper mapper, DispatcherServlet dispatcher) {
+	public GenericLoggerBuilder(ObjectMapper mapper, DispatcherServlet dispatcher) {
 		super();
 		this.mapper = mapper;
 		this.dispatcher = dispatcher;
@@ -127,8 +127,9 @@ public class GenericFilterInfoBuilder implements FilterInfoBuilder {
 			return result;
 	}
 	
-	public LoggingPojo buildPojo(HttpServletRequest request, HttpServletResponse response, Object requestBody, Object responseBody, Method method, long timeTaken) {
-		LoggingPojo pojo = new LoggingPojo();
+	@Override
+	public GenericLoggingPojo buildPojo(HttpServletRequest request, HttpServletResponse response, Object requestBody, Object responseBody, Method method, long timeTaken) {
+		GenericLoggingPojo pojo = new GenericLoggingPojo();
         return pojo.build(request, response, requestBody, responseBody, method, timeTaken);
 	}
 

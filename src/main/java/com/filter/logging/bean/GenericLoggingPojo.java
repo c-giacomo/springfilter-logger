@@ -17,7 +17,7 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 @Getter
 @Setter
-public class LoggingPojo {
+public class GenericLoggingPojo {
 	
 	private Set<String> matricola;
 	private String requestType;
@@ -31,14 +31,14 @@ public class LoggingPojo {
 	private String returnType;
 	private String returnObject;
 	
-	public LoggingPojo() {
+	public GenericLoggingPojo() {
 		matricola = new HashSet<>();
 		matricola.add("ciao");
 		matricola.add("fica");
 	}
 	
 	@SuppressWarnings("rawtypes")
-	public LoggingPojo build(HttpServletRequest request, HttpServletResponse response, Object requestBody, Object responseBody, Method method, long timeTaken) {
+	public GenericLoggingPojo build(HttpServletRequest request, HttpServletResponse response, Object requestBody, Object responseBody, Method method, long timeTaken) {
 		this.setRequestType(request.getMethod());
 		this.setRequestUri(request.getRequestURI());
 		this.setRequestHost(request.getRequestURL().toString());
